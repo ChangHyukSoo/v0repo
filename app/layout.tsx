@@ -3,9 +3,13 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  metadataBase: new URL('https://example.com'),
+  title: {
+    default: '여백 — 생각이 머무는 작은 공간',
+    template: '%s | 여백',
+  },
+  description: '읽고, 만들고, 배운 것들을 천천히 기록하는 개인 블로그입니다.',
+  generator: 'Next.js',
   icons: {
     icon: [
       {
@@ -39,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className="antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

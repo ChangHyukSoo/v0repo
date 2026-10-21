@@ -153,6 +153,22 @@
   }
 }
 
+.post-body h1, .post-body h2, .post-body h3 { margin-top: 2.25rem; margin-bottom: 1rem; font-weight: 650; letter-spacing: -0.02em; }
+.post-body h1 { font-size: 2rem; }
+.post-body h2 { font-size: 1.5rem; }
+.post-body h3 { font-size: 1.2rem; }
+.post-body p { margin: 1.1rem 0; line-height: 2; }
+.post-body ul, .post-body ol { margin: 1rem 0; padding-left: 1.5rem; line-height: 2; }
+.post-body ul { list-style: disc; }
+.post-body ol { list-style: decimal; }
+.post-body blockquote { margin: 1.5rem 0; border-left: 3px solid var(--primary); padding-left: 1rem; font-style: italic; }
+.post-body pre { margin: 1.5rem 0; overflow-x: auto; border-radius: 0.75rem; padding: 1rem; background: var(--muted); }
+.post-body code { border-radius: 0.25rem; background: var(--muted); padding: 0.15rem 0.3rem; font-size: 0.9em; }
+.post-body pre code { background: transparent; padding: 0; }
+.post-body a { text-decoration: underline; text-underline-offset: 4px; }
+.post-body table { margin: 1.5rem 0; border-collapse: collapse; }
+.post-body th, .post-body td { border: 1px solid var(--border); padding: 0.65rem 0.8rem; text-align: left; }
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
