@@ -3,9 +3,9 @@ import { SiteHeader } from '@/components/site-header'
 import { PostDetail } from '@/components/post-detail'
 import { getAllPosts, getPostWithHtml } from '@/lib/posts'
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-static'
 
-export function generateStaticParams() { return getAllPosts(true).map((post) => ({ slug: post.slug })) }
+export function generateStaticParams() { return (process.env.NODE_ENV === 'production' ? [{ slug: '__disabled__' }] : getAllPosts(true)).map((post) => ({ slug: post.slug })) }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   if (process.env.NODE_ENV === 'production') return {}

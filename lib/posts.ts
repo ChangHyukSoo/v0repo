@@ -6,6 +6,7 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeSlug from 'rehype-slug'
 import rehypeStringify from 'rehype-stringify'
+import { withBasePath } from '@/lib/site'
 
 export type PostFrontmatter = {
   title: string
@@ -47,8 +48,24 @@ export function getPostBySlug(slug: string, includeDrafts = false) {
   return getAllPosts(includeDrafts).find((post) => post.slug === slug)
 }
 
+function prefixLocalUrls() {
+  type Node = { type: string; properties?: Record<string, unknown>; children?: Node[] }
+  return (tree: Node) => {
+    function visit(node: Node) {
+      for (const key of ['src', 'href']) {
+        const value = node.properties?.[key]
+        if (typeof value === 'string' && value.startsWith('/') && !value.startsWith('//')) {
+          node.properties![key] = withBasePath(value)
+        }
+      }
+      node.children?.forEach(visit)
+    }
+    visit(tree)
+  }
+}
+
 export async function renderMarkdown(markdown: string) {
-  const result = await unified().use(remarkParse).use(remarkRehype).use(rehypeSlug).use(rehypeStringify).process(markdown)
+  const result = await unified().use(remarkParse).use(remarkRehype).use(rehypeSlug).use(prefixLocalUrls).use(rehypeStringify).process(markdown)
   return String(result)
 }
 

@@ -3,7 +3,7 @@ import { SiteHeader } from '@/components/site-header'
 import { PostList } from '@/components/post-list'
 import { getAllPosts } from '@/lib/posts'
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-static'
 
 export default function PreviewPage() {
   if (process.env.NODE_ENV === 'production') notFound()

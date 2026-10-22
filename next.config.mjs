@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  ...(process.env.GITHUB_PAGES === 'true' ? { output: 'export', trailingSlash: true } : {}),
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   typescript: {
     ignoreBuildErrors: true,
   },
